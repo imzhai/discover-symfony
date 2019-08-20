@@ -15,6 +15,23 @@ class WelcomeController extends AbstractController
     // Le prénom dans l'URL doit être dynamique et le contrôleur doit se charger d'ajouter la première lettre du prénom en majuscule et ensuite il doit passer la variable à la vue twig
 
 
+    /**
+     * @Route("/hello", name="hello")
+     */
+    public function hello(Request $request) // Le typage Request active le component Request
+    {
+        $name = 'Matthieu';
+
+        // $request->get('a') équivaut à $_GET['a']
+        dump($request);
+
+        //return new Response('<body>Salut Boloss et '. $name . '</body>');
+        // On fait un rendu de la vue twig qui est située dans le dossier templates/
+        //Le controler passe la variable name à la vie grâce au second paramètre de render qui est un tableau
+        return $this->render('welcome/hello.html.twig', [
+            'nom' => $name,
+        ]);
+    }
 
     
     /**
@@ -22,9 +39,8 @@ class WelcomeController extends AbstractController
      */
     public function holla($nom)
     {
-        
-        dump($nom);
         $nom = ucfirst($nom);
+        dump($nom);
 
         //return new Response('<body>Salut Boloss et '. $name . '</body>');
         // On fait un rendu de la vue twig qui est située dans le dossier templates/
@@ -48,29 +64,6 @@ class WelcomeController extends AbstractController
         //Le controler passe la variable name à la vie grâce au second paramètre de render qui est un tableau
         return new Response('<body> <h1>Bonjour tout le monde !</h1></body>');
     }
-
-
-    /**
-     * @Route("/hello", name="hello")
-     */
-    public function hello(Request $request) // Le typage Request active le component Request
-    {
-        $name = 'Matthieu';
-
-        // $request->get('a') équivaut à $_GET['a']
-        dump($request);
-
-        //return new Response('<body>Salut Boloss et '. $name . '</body>');
-        // On fait un rendu de la vue twig qui est située dans le dossier templates/
-        //Le controler passe la variable name à la vie grâce au second paramètre de render qui est un tableau
-        return $this->render('welcome/hello.html.twig', [
-            'name' => $name,
-        ]);
-    }
-
-
-
-
 }
 
     
